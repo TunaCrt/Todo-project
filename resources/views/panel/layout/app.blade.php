@@ -17,7 +17,7 @@
     class="light-style layout-menu-fixed"
     dir="ltr"
     data-theme="theme-default"
-    data-assets-path="../assets/"
+    data-assets-path="{{asset("panel/assets/")}}"
     data-template="vertical-menu-template-free"
 >
 <head>
@@ -32,7 +32,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{asset("panel/assets/img/favicon/favicon.ico")}}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,7 +58,7 @@
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="{{asset("panel/assets/vendor/js/helpers.js")}}"></script>{{asset("panel/assets/vendor/libs/apex-charts/apex-charts.css")}}
+    <script src="{{asset("panel/assets/vendor/js/helpers.js")}}"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
@@ -190,7 +190,7 @@
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                        <div data-i18n="Account Settings">Account Settings</div>
+                        <div data-i18n="Account Settings">Katagoriler</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
@@ -257,7 +257,7 @@
                 <li class="menu-item">
                     <a href="cards-basic.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-collection"></i>
-                        <div data-i18n="Basic">Cards</div>
+                        <div data-i18n="Basic">Kategoriler</div>
                     </a>
                 </li>
                 <!-- User interface -->

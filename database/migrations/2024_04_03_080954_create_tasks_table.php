@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id");
-            $table->integer("category_id");
+            $table->unsignedBigInteger("category_id");
 
             $table->String("title")->nullable();
             $table->String("content");
@@ -23,6 +22,8 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->timestamps();
+
+            $table->foreign('category_id')->on('categories')->references('id');
         });
     }
 
