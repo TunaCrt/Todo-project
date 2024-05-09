@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->String("name");
+            $table->unsignedBigInteger('user_id');
             $table->boolean("isActive")->default(1)->comment("0-inaktif 1-aktif");
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('user_id')->on('users')->references('id');
         });
     }
 
