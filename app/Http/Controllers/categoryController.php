@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class categoryController extends Controller
 {
@@ -13,8 +14,10 @@ class categoryController extends Controller
     public function index()
     {
         //
-        $kategoriler = Category::get();
-        return view('panel.categories.index',compact('kategoriler'));
+        $kategoriler = Category::where('user_id',Auth::id())->get();
+        $silinenKategoriler = Category::onlyTrashed()->get();
+
+        return view('panel.categories.index',compact('kategoriler','silinenKategoriler'));
     }
 
     /**
@@ -37,9 +40,13 @@ class categoryController extends Controller
         $category = new Category();
         $category->name = $request->category_name;
         $category->isActive = $request->category_status;
+        $category->user_id = Auth::id();
         $category->save();
         return redirect()->route('panel.categoryIndex')->with(['success'=> 'Kategori başarıyla oluşturuldu']);
-         }
+
+
+
+    }
 
     /**
      * Display the specified resource.
@@ -75,8 +82,15 @@ class categoryController extends Controller
     {
         //
         $category = Category::find($id);
-        $category->delete();
-        return redirect()->route('panel.categoryIndex')->with(['success'=> 'Kategori başarıyla Silindi']);
+        if ($category->deleted_at == null){
+            $category->delete();
+            return redirect()->route('panel.categoryIndex')->with(['success'=> 'Kategori başarıyla Silindi']);
+
+        }else{
+            return redirect()->route('panel.categoryIndex')->with(['error'=> 'Hata Oluştu']);
+
+        }
+
 
     }
     public function updateCategory(Request $request)

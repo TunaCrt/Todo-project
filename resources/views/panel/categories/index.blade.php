@@ -18,7 +18,7 @@
 
             <h5 class="card-header">Kategoriler</h5>
             <div class="table-responsive text-nowrap">
-                <a href="{{route('panel.categoryCreatePage')}}" class="btn btn-success">Kategori Oluştur</a>
+                <a href="{{route('panel.categoryCreatePage')}}" class="btn btn-success m-3">Kategori Oluştur</a>
                 @if($kategoriler->first())
                     <table class="table">
                         <thead>
@@ -43,7 +43,7 @@
                                 <td>{{$kategori->created_at->diffForHumans()}}</td>
                                 <td>
                                     <a href="{{ route("panel.categoryUpdatePage",$kategori->id) }}" class="btn btn-info">Güncelle</a>
-                                    <a href="{{route('panel.categoryDelete')}}" class="btn btn-danger">Sil</a>
+                                    <a href="{{route('panel.categoryDelete',$kategori->id)}}" class="btn btn-danger">Sil</a>
                                 </td>
 
                             </tr>
@@ -51,11 +51,46 @@
                         </tbody>
                     </table>
                 @else
-                    <p>henüz hiç kategori oluşturmaıdnız</p>
+                    <p>henüz hiç kategori oluşturulmadı</p>
                 @endif
-
-
             </div>
+                <h5 class="card-header">Silinen Kategoriler</h5>
+                <div class="table-responsive text-nowrap">
+                @if($silinenKategoriler->first())
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Kategori Adı</th>
+                            <th>Durum</th>
+                            <th>Oluşturulma Tarihi</th>
+                            <th>İşlemler</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                        @foreach($silinenKategoriler as $Skategori)
+                            <tr>
+                                <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$Skategori->name}}</strong></td>
+                                <td>
+                                    @if($Skategori->isActive == 1)
+                                        aktif
+                                    @else
+                                        pasif
+                                    @endif
+                                </td>
+                                <td>{{$Skategori->created_at->diffForHumans()}}</td>
+                                <td>
+                                    <button disabled href="{{ route("panel.categoryUpdatePage",$Skategori->id) }}" class="btn btn-info">Güncelle</button>
+                                    <button disabled href="{{route('panel.categoryDelete',$Skategori->id)}}" class="btn btn-danger">Sil</button>
+                                </td>
+
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>henüz hiç kategori silmediniz</p>
+                @endif
+                </div>
         </div>
     </div>
 @endsection()
